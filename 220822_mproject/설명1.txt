@@ -50,7 +50,7 @@
   	  클래스 + xml
   - 자동화된 동작
       내부적으로 DataSource를 가지고 SqlSessionFactory 생성 -> SqlSessionTemplate 생성을 거친다
-  - xml 설정을 사용할 경우
+  - xml 설정을 사용할 경우 (mvc의 경우 직접 입력해야함)
    		<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
    			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
    			<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
