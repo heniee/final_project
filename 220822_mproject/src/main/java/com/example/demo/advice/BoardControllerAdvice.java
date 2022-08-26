@@ -19,13 +19,13 @@ public class BoardControllerAdvice {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
 	}
 	
-	@ExceptionHandler(BoardNotFoundException.class)
+	@ExceptionHandler(BoardNotFoundException.class) //글이없다
 	public ResponseEntity<String> BNFExption(){
 		return ResponseEntity.status(HttpStatus.CONFLICT).body("게시물을 찾을 수 없습니다");
 		
 	}
 	
-	@ExceptionHandler(JobFailException.class)
+	@ExceptionHandler(JobFailException.class) //글쓴이가 아니다 
 	public ResponseEntity<String> JFExption(JobFailException e){
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
 		

@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,13 +41,18 @@ public class BoardDaoTest {
 	// Test 케이스 3. count: count -> 개수를 수동으로 확인해서 assert한다
 	//@Test
 	public void countTest() {
-		assertEquals(24, boardDao.count(null));
+		assertEquals(26, boardDao.count(null));
 	}
 	
 	// Test 케이스 4. findAll : 글이 14개 있다 11~14까지 4개를 읽어오자
 	//@Test
 	 public void findAllTest() {
-		assertEquals(4, boardDao.findAll(null,11, 14).size());
+		Map<String,Object> map = new HashMap<>();
+		map.put("writer", null);
+		map.put("start",11);
+		map.put("end",14);
+		
+		assertEquals(4, boardDao.findAll(map).size());
 	}
 
 	// Test 케이스 5 :(내용,제목), 조회수,좋아요,싫어요에 대한 값을 주면 update
@@ -61,14 +69,14 @@ public class BoardDaoTest {
 	// Test 케이스 6 : 1번글을 읽으면 비어있다, 2번글을 읽으면 존재한다
 	//@Test
 	public void findByIdTest() {
-		assertEquals(true, boardDao.findById(1).isEmpty());
+		assertEquals(true, boardDao.findById(50).isEmpty());
 		assertEquals(true, boardDao.findById(1).isPresent());
 	}
 	
 	// Test 케이스 7 : 글의 작성자 확인
 	//@Test
 	public void findWriterTest() {
-		assertEquals("spring", boardDao.findWriterById(1));
+		assertEquals("spring", boardDao.findWriterById(2));
 	}	
 	
 	// Test 케이스 8 : 글의 삭제 결과 성공시 1, 실패시 0 

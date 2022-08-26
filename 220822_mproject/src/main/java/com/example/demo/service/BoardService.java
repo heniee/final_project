@@ -30,6 +30,7 @@ public class BoardService {
 	
 	// 서비스는 업무로직(비즈니스 로직)이 있는 곳
 	// 글읽기 : 글이 없으면 409. 글이 있고 글쓴이면 조회수 증가 
+	// orElseThrow를 이용해 예외 발생 -> ControllerAdvice에서 처리
 	public BoardDto.Read read(Integer bno, String loginId){
 		BoardDto.Read dto = boardDao.findById(bno).orElseThrow(()->new BoardNotFoundException());
 		// 글쓴이가 아닐경우 
@@ -57,7 +58,8 @@ public class BoardService {
 		map.put("writer", writer);
 		map.put("start",start);
 		map.put("end",end);
-		return new Page();
+		return new Page(pageno, pagesize,totalcount, boardDao.findAll(map));
+		//return new Page(pageno, pagesize,totalcount, boardDao.findAll(map));
 	}
 	
 	// 글변경 : 실패 - 글이 없다(BoardNotFouneException), 글쓴이가 아니다(JobFailException)
